@@ -1,0 +1,80 @@
+/* Main container for the projects card */
+.projects-card {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 30px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .projects-card h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .project {
+    margin-bottom: 30px;
+  }
+  
+  .project h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .project p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  /* Container for images - Flexbox row for 3 images per row */
+  .project-images {
+    display: flex; /* Ensure equal spacing between images */
+    margin-top: 10px;
+    justify-content: center;
+  }
+  
+  /* Styling each image */
+  .project-images img {
+    width: 250px; /* Fixed width for small images */
+    height: 250px;
+    margin-inline: 20px;
+    border-radius: 5px;
+    object-fit: cover; /* Ensures images maintain aspect ratio */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .projects-card {
+      max-width: 90%;
+      padding: 20px;
+    }
+  
+    .projects-card h2 {
+      font-size: 1.8rem;
+    }
+  
+    .project h3 {
+      font-size: 1.3rem;
+    }
+  
+    .project p {
+      font-size: 0.9rem;
+    }
+  
+    .project-images img {
+      width: 80px; /* Smaller images for mobile */
+      height: 80px;
+    }
+  }
+  

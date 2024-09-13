@@ -1,0 +1,38 @@
+/* Define the CSS variables for both themes */
+:root {
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --link-color: #007BFF;
+  --card-background: rgba(255, 255, 255, 0.85);
+  --cell-alive: rgba(0, 0, 0, 0.075);
+  --cell-dead: rgba(255, 255, 255, 0.7);
+  --cell-border: rgba(0, 0, 0, 0.02);
+}
+
+body.dark-mode {
+  --background-color: #1a1a1a;
+  --text-color: #f1f1f1;
+  --link-color: #66d9ff;
+  --card-background: rgba(50, 50, 50, 0.85);
+  --cell-alive: rgba(255, 255, 255, 0.1);
+  --cell-dead: rgba(0, 0, 0, 0.7);
+  --cell-border: rgba(255, 255, 255, 0.02);
+}
+
+/* Apply the variables to the body */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition between themes */
+}
+
+/* Link styling */
+a {
+  color: var(--link-color);
+}
+
+/* Info card styling - make sure it respects the theme */
+.info-card {
+  background-color: var(--card-background);
+  transition: background-color 0.3s; /* Smooth transition for card background */
+}

@@ -1,0 +1,40 @@
+/* Container that holds the Game of Life grid, fixed to act as background */
+.game-of-life-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Behind other content */
+    overflow: hidden;
+    pointer-events: none; /* Ignore mouse events so elements on top can be interacted with */
+  }
+  
+  /* Grid container with rotation and translation applied */
+  .grid {
+    display: grid;
+    transform-origin: center center; /* Rotate around the center */
+    /* Adjusted to move the grid upward */
+    position: absolute;
+    top: -10vh; /* Move the grid up by 10% of viewport height */
+    transform: translateY(-50%);
+  }
+
+  /* Individual cell styling */
+  .cell {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.02); /* Light border */
+  }
+  
+  /* Styling for live cells (black) */
+  .cell-alive {
+    background-color: rgba(0, 0, 0, 0.075); /* Semi-transparent black */
+  }
+  
+  /* Styling for dead cells (white) */
+  .cell-dead {
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+  }
+  
