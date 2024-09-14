@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import InfoCard from './InfoCard';
 import ProjectsCard from './ProjectsCard';
 import ContactCard from './ContactCard';
+import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
   // State to control which card to display based on the URL
@@ -26,6 +27,7 @@ const App = () => {
       {currentPage === "/" && <InfoCard />}
       {currentPage === "/projects" && <ProjectsCard />}
       {currentPage === "/contact" && <ContactCard />}
+      <Analytics/>
     </div>
   );
 };
