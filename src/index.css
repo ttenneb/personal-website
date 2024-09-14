@@ -15,9 +15,9 @@ code {
 /* Main app container */
 .app-container {
   position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden; /* Ensure background and content fit within the viewport */
+  width: 100%;
+  min-height: 100vh; /* Allow container to grow */
+  overflow-x: hidden; /* Allow vertical scrolling */
 }
 
 /* Flex container for the two cards */
@@ -37,4 +37,10 @@ code {
   margin-bottom: 20px;
 }
 
-
+.projects-card {
+  width: 100%;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+} 

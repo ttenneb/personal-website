@@ -5,10 +5,10 @@ const ProjectsCard = () => {
   const projects = [
     {
         title: "React Survey Platform",
-        description: "Developed a survey platform in React using SurveyJS with a Node.js and Postgres backend. The platform features dynamic survey creation and real-time analytics. Deployed on AWS.",
+        description: "Built a survey platform in React using SurveyJS with a Node.js and Postgres backend. The platform features dynamic survey creation from csv/json files, a dashboard for modifying surveys and pulling results, and a email notification system with Resend. Deployed on AWS.",
         images: [
-          "https://raw.githubusercontent.com/ttenneb/Game-Engine/master/Objects.gif", // Example image 1
-          "https://raw.githubusercontent.com/ttenneb/Game-Engine/master/Collision.gif", // Example image 2
+          "https://raw.githubusercontent.com/ttenneb/personal-website/main/SurveyExample.png", // Example image 1
+          "https://raw.githubusercontent.com/ttenneb/personal-website/main/EmailExample.png", // Example image 2
         ],
     },
     {
@@ -20,8 +20,8 @@ const ProjectsCard = () => {
         ],
     },
     {
-      title: "AI-Powered Workflow Automation",
-      description: "Streamlined enterprise-level workflows using machine learning models. Built with Python and TensorFlow.",
+      title: "PyTorch Orbit Estimation using Variational Inference",
+      description: "A physics simulation and and probabilistic model written in PyTorch. Optimizes the initial distributions of objects to enter an orbit using variational Bayesian inference (E.L.B.O Maximization through gradient descent). The simulation can process 100s of objects in parallel and is fully written in Pytorch to leverage a GPU.",
       images: [
         "https://raw.githubusercontent.com/ttenneb/bayesian_practice/master/Initial%20Trajectories.gif", // Example image 2
         "https://raw.githubusercontent.com/ttenneb/bayesian_practice/master/Learned%20Initial%20Coniditons.gif", // Example image 3

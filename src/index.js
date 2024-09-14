@@ -1,20 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import InfoCard from './InfoCard';
 import reportWebVitals from './reportWebVitals';
-import GameOfLife from './GameOfLife';
-import ThemeToggle from './ThemeToggle';
-import ProjectsCard from './ProjectsCard';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <GameOfLife />
-    <div className="cards-column">
-      <InfoCard />
-      <ProjectsCard />
-    </div>
+    <App />
   </React.StrictMode>
 );
 
