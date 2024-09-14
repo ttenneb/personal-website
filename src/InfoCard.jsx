@@ -15,7 +15,7 @@ const InfoCard = ({ onProjectLinkClick }) => {
         <a href={window.location.origin + "/projects"} onClick={onProjectLinkClick}>
           Portfolio
         </a>
-        <a href="https://raw.githubusercontent.com/ttenneb/personal-website/69c20635a57d69d9247b038ac5be59a8d19f710e/Bennett%20Garcia%20Resume.pdf" target="_blank" rel="noreferrer">
+        <a href="https://personal-website-psi-ochre.vercel.app/Bennett_Garcia_Resume.pdf" target="_blank" rel="noreferrer">
           Resume
         </a>
         <a href="#Contact" target="_blank" rel="noreferrer">
