@@ -5,21 +5,16 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import InfoCard from './InfoCard';
 import ProjectsCard from './ProjectsCard';
+import ContactCard from './ContactCard';
 
 const App = () => {
-  // State to control whether the InfoCard or ProjectsCard is shown
-  const [showProjects, setShowProjects] = useState(false);
+  // State to control which card to display based on the URL
+  const [currentPage, setCurrentPage] = useState("/");
 
   // Detect URL changes and show the appropriate card
   useEffect(() => {
     const path = window.location.pathname;
-    // If URL is "/projects", show ProjectsCard
-    if (path === "/projects") {
-      setShowProjects(true);
-    } else {
-      // For root or any other path, show InfoCard
-      setShowProjects(false);
-    }
+    setCurrentPage(path);
   }, []);
 
   return (
@@ -27,14 +22,10 @@ const App = () => {
       {/* Background component */}
       <GameOfLife />
 
-      {/* Conditionally render the InfoCard or ProjectsCard based on the state */}
-      <div className="cards-column">
-        {!showProjects ? (
-          <InfoCard />
-        ) : (
-          <ProjectsCard />
-        )}
-      </div>
+      {/* Conditionally render the correct card based on the URL */}
+      {currentPage === "/" && <InfoCard />}
+      {currentPage === "/projects" && <ProjectsCard />}
+      {currentPage === "/contact" && <ContactCard />}
     </div>
   );
 };

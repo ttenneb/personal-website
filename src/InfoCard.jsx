@@ -1,7 +1,7 @@
 import React from "react";
 import "./InfoCard.css"; // Import the CSS
 
-const InfoCard = ({ onProjectLinkClick }) => {
+const InfoCard = () => {
   return (
     <div className="info-card">
       <h1>Bennett Garcia</h1>
@@ -12,13 +12,13 @@ const InfoCard = ({ onProjectLinkClick }) => {
         Passionate about ML, Bayesian Mechanics, and distributed systems within software and beyond. Currently exploring opportunities...
       </p>
       <div className="menu">
-        <a href={window.location.origin + "/projects"} onClick={onProjectLinkClick}>
+        <a href={window.location.origin + "/projects"}>
           Portfolio
         </a>
         <a href="https://www.bennetts.work/Bennett_Garcia_Resume.pdf" target="_blank" rel="noreferrer">
           Resume
         </a>
-        <a href="#Contact" target="_blank" rel="noreferrer">
+        <a href={window.location.origin + "/contact"} >
           Contact
         </a>
       </div>
