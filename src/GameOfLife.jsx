@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./GameOfLife.css"; // Importing the external CSS file
 
-const GameOfLife = ({ speed = 200, maxRotation = .5, rotationPeriod = 12000, parallaxIntensity = 10 }) => {
+const GameOfLife = ({ speed = 200, maxRotation = 1, rotationPeriod = 30000, parallaxIntensity = 10 }) => {
   const [grid, setGrid] = useState([]);
   const [rows, setRows] = useState(0);
   const [cols, setCols] = useState(0);
@@ -22,7 +22,7 @@ const GameOfLife = ({ speed = 200, maxRotation = .5, rotationPeriod = 12000, par
     setRows(newRows);
 
     return Array.from({ length: newRows }, () =>
-      Array(newCols).fill(0).map(() => (Math.random() > 0.75 ? 1 : 0))
+      Array(newCols).fill(0).map(() => (Math.random() > 0.7 ? 1 : 0))
     );
   };
 
