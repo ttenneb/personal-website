@@ -1,16 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./GameOfLife.css"; // Importing the external CSS file
+import "./GameOfLife.css";
 
-const GameOfLife = ({ speed = 200, maxRotation = 1, rotationPeriod = 30000, parallaxIntensity = 10 }) => {
+const GameOfLife = ({
+  speed = 200,
+  maxRotation = 1,
+  rotationPeriod = 30000,
+  parallaxIntensity = 0,
+}) => {
   const [grid, setGrid] = useState([]);
   const [rows, setRows] = useState(0);
   const [cols, setCols] = useState(0);
-  const [rotationAngle, setRotationAngle] = useState(0);
-  const [translateX, setTranslateX] = useState(0);
-  const [translateY, setTranslateY] = useState(0);
   const cellSize = 50;
-  const requestRef = useRef();
+  const gridRef = useRef(null);
+  const rotationAngle = useRef(0);
+  const mousePosition = useRef({ x: 0, y: 0 });
+  const animationFrameId = useRef(null);
 
+  // Calculate grid size based on window size
   const calculateGridSize = () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -21,31 +27,37 @@ const GameOfLife = ({ speed = 200, maxRotation = 1, rotationPeriod = 30000, para
     setCols(newCols);
     setRows(newRows);
 
+    // Create a new grid with random initial conditions
     return Array.from({ length: newRows }, () =>
-      Array(newCols).fill(0).map(() => (Math.random() > 0.7 ? 1 : 0))
+      Array(newCols)
+        .fill(0)
+        .map(() => (Math.random() > 0.7 ? 1 : 0))
     );
   };
 
+  // Initialize the grid
   useEffect(() => {
     setGrid(calculateGridSize());
-    window.addEventListener("resize", () => {
+    const handleResize = () => {
       setGrid(calculateGridSize());
-    });
+    };
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", calculateGridSize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Game of Life simulation
   const runSimulation = () => {
-    setGrid(prevGrid => {
-      return prevGrid.map((row, rowIndex) =>
+    setGrid((prevGrid) =>
+      prevGrid.map((row, rowIndex) =>
         row.map((col, colIndex) => {
           const neighbors = countNeighbors(prevGrid, rowIndex, colIndex);
           if (col === 1 && (neighbors < 2 || neighbors > 3)) return 0;
           if (col === 0 && neighbors === 3) return 1;
           return col;
         })
-      );
-    });
+      )
+    );
   };
 
   const countNeighbors = (grid, x, y) => {
@@ -72,66 +84,66 @@ const GameOfLife = ({ speed = 200, maxRotation = 1, rotationPeriod = 30000, para
     return count;
   };
 
+  // Run the simulation at the specified speed
   useEffect(() => {
     const interval = setInterval(runSimulation, speed);
     return () => clearInterval(interval);
   }, [grid]);
 
+  // Handle animations (rotation and parallax)
   useEffect(() => {
-    let animationFrameId;
     let startTime = performance.now();
 
-    const animateRotation = (currentTime) => {
+    const animate = (currentTime) => {
       const elapsedTime = currentTime - startTime;
-      const angle =
-        maxRotation * Math.sin((2 * Math.PI * elapsedTime) / rotationPeriod)+5;
 
-      setRotationAngle(angle);
+      // Update rotation angle
+      rotationAngle.current =
+        maxRotation * Math.sin((2 * Math.PI * elapsedTime) / rotationPeriod) +
+        5;
 
-      animationFrameId = requestAnimationFrame(animateRotation);
+      // Calculate parallax translation
+      const translateX = mousePosition.current.x * parallaxIntensity;
+      const translateY = mousePosition.current.y * parallaxIntensity;
+
+      // Apply transforms directly to the grid element
+      if (gridRef.current) {
+        gridRef.current.style.transform = `rotate(${rotationAngle.current}deg) translate(${translateX}px, ${translateY}px)`;
+      }
+
+      animationFrameId.current = requestAnimationFrame(animate);
     };
 
-    animationFrameId = requestAnimationFrame(animateRotation);
+    animationFrameId.current = requestAnimationFrame(animate);
 
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [maxRotation, rotationPeriod]);
+    return () => cancelAnimationFrame(animationFrameId.current);
+  }, [maxRotation, rotationPeriod, parallaxIntensity]);
 
+  // Handle mouse movement for parallax effect
   useEffect(() => {
-    let mouseX = 0;
-    let mouseY = 0;
-
     const handleMouseMove = (event) => {
       const { clientX, clientY } = event;
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
 
-      mouseX = (clientX - centerX) / centerX;
-      mouseY = (clientY - centerY) / centerY;
-    };
-
-    const updateParallax = () => {
-      setTranslateX(mouseX * parallaxIntensity);
-      setTranslateY(mouseY * parallaxIntensity);
-      requestRef.current = requestAnimationFrame(updateParallax);
+      // Normalize mouse position to range [-1, 1]
+      mousePosition.current.x = (clientX - centerX) / centerX;
+      mousePosition.current.y = (clientY - centerY) / centerY;
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    requestRef.current = requestAnimationFrame(updateParallax);
 
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(requestRef.current);
-    };
-  }, [parallaxIntensity]);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   return (
     <div className="game-of-life-background">
       <div
         className="grid"
+        ref={gridRef}
         style={{
           gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,
           gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
-          transform: `rotate(${rotationAngle}deg) translate(${translateX}px, ${translateY}px)`,
         }}
       >
         {grid.map((row, rowIndex) =>
