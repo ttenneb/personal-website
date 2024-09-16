@@ -1,24 +1,25 @@
-/* Container that holds the Game of Life grid, fixed to act as background */
-.game-of-life-background {
+  /* Container that holds the Game of Life grid, fixed to act as background */
+  .game-of-life-background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1; /* Behind other content */
+    z-index: -1;
     overflow: hidden;
-    pointer-events: none; /* Ignore mouse events so elements on top can be interacted with */
+    pointer-events: none;
   }
-  
-  /* Grid container with rotation and translation applied */
+
+  /* Update grid positioning */
   .grid {
     display: grid;
-    transform-origin: center center; /* Rotate around the center */
-    /* Adjusted to move the grid upward */
     position: absolute;
-    top: -10vh; /* Move the grid up by 10% of viewport height */
-    transform: translateY(-50%);
+    top: -20vh; /* Offset the grid vertically to ensure it covers the top */
+    left: -20vw; /* Offset the grid horizontally to cover the left side */
+    transform-origin: center; /* Rotate around the center to keep it balanced */
+    transform: rotate(5deg); /* Keep the rotation with the added bias */
   }
+
 
   /* Individual cell styling */
   .cell {
