@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./GameOfLife.css";
 
 const GameOfLife = ({
-  speed = 150,
+  speed = 600,
   maxRotation = 1,  // Maximum rotation angle
   rotationPeriod = 30000,  // Time in ms for a full rotation cycle
   cellSize = 50,
