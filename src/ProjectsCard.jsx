@@ -1,5 +1,6 @@
 import React from "react";
 import "./ProjectsCard.css"; // Import the CSS for projects card
+import MediaComponent from './MediaComponent'; // Import the MediaComponent
 
 const ProjectsCard = () => {
   const projects = [
@@ -15,16 +16,16 @@ const ProjectsCard = () => {
         title: "Java 2D Game Engine",
         description: "Developed a 2D game engine in Java with collision detection, physics, and rendering.",
         images: [
-          "https://raw.githubusercontent.com/ttenneb/Game-Engine/master/Objects.gif", // Example image 1
-          "https://raw.githubusercontent.com/ttenneb/Game-Engine/master/Collision.gif", // Example image 2
+          "https://bennetts.work/java-game-engine-1.mp4", // Example GIF 1
+          "https://bennetts.work/java-game-engine-2.mp4", // Example GIF 2
         ],
     },
     {
       title: "PyTorch Orbit Estimation using Variational Inference",
-      description: "A physics simulation and and probabilistic model written in PyTorch. Optimizes the initial distributions of objects to enter an orbit using variational Bayesian inference (E.L.B.O Maximization through gradient descent). The simulation can process 100s of objects in parallel and is fully written in Pytorch to leverage a GPU.",
+      description: "A physics simulation and probabilistic model written in PyTorch. Optimizes the initial distributions of objects to enter an orbit using variational Bayesian inference (E.L.B.O Maximization through gradient descent). The simulation can process 100s of objects in parallel and is fully written in Pytorch to leverage a GPU.",
       images: [
-        "https://raw.githubusercontent.com/ttenneb/bayesian_practice/master/Initial%20Trajectories.gif", // Example image 2
-        "https://raw.githubusercontent.com/ttenneb/bayesian_practice/master/Learned%20Initial%20Coniditons.gif", // Example image 3
+        "https://bennetts.work/orbit-elbo-1.mp4", // Example GIF 1
+        "https://bennetts.work/orbit-elbo-2.mp4", // Example GIF 2
       ],
     },
     {
@@ -46,10 +47,16 @@ const ProjectsCard = () => {
           <h3>{project.title}</h3>
           <p>{project.description}</p>
 
-          {/* Display images in a row */}
+          {/* Display images or videos in a row using MediaComponent */}
           <div className="project-images">
-            {project.images.map((image, imgIndex) => (
-              <img key={imgIndex} src={image} alt={`Project ${index + 1} Image ${imgIndex + 1}`} />
+            {project.images.map((mediaSrc, mediaIndex) => (
+              <MediaComponent
+                key={mediaIndex}
+                src={mediaSrc}
+                alt={`Project ${index + 1} Media ${mediaIndex + 1}`}
+                width="100%" // Set appropriate width
+                height="auto" // Maintain aspect ratio
+              />
             ))}
           </div>
         </div>
