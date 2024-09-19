@@ -6,7 +6,7 @@ const MediaComponent = ({ src, alt, width, height }) => {
 
   if (isVideo) {
     return (
-      <video width={width} height={height} controls autoPlay loop muted>
+      <video width={width} height={height} controls loop muted>
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
