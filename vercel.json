@@ -6,8 +6,5 @@
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
       ]
     }
-  ],
-  "redirects": [
-    { "source": "http://ttennebs.work/(.*)", "destination": "https://ttennebs.work/$1", "permanent": true }
   ]
 }
