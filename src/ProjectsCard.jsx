@@ -8,8 +8,8 @@ const ProjectsCard = () => {
         title: "React Survey Platform",
         description: "Built a survey platform in React using SurveyJS with a Node.js and Postgres backend. The platform features dynamic survey creation from csv/json files, a dashboard for modifying surveys and pulling results, and a email notification system with Resend. Deployed on AWS.",
         images: [
-          "https://raw.githubusercontent.com/ttenneb/personal-website/main/SurveyExample.png", // Example image 1
-          "https://raw.githubusercontent.com/ttenneb/personal-website/main/EmailExample.png", // Example image 2
+          "https://raw.githubusercontent.com/ttenneb/personal-website/main/survey_demo_pic.PNG", // Example image 1
+          "https://raw.githubusercontent.com/ttenneb/personal-website/main/dashboard_ona_demo.PNG", // Example image 2
         ],
     },
     {
