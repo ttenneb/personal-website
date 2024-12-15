@@ -6,11 +6,12 @@ const ProjectsCard = () => {
   const projects = [
     {
         title: "React Survey Platform",
-        description: "Built a survey platform in React using SurveyJS with a Node.js and Postgres backend. The platform features dynamic survey creation from csv/json files, a dashboard for modifying surveys and pulling results, and a email notification system with Resend. Deployed on AWS.",
+        description: "Built a survey platform in React, MaterialUI, and SurveyJS with an Node.js, Express, and Postgres backend. Deployed to AWS fully with Terraform. The platform features dynamic survey creation from csv/json files, a dashboard for modifying surveys and visualizing results, and a email notification system with Resend.",
         images: [
           "https://raw.githubusercontent.com/ttenneb/personal-website/main/survey_demo_pic.PNG", // Example image 1
           "https://raw.githubusercontent.com/ttenneb/personal-website/main/dashboard_ona_demo.PNG", // Example image 2
         ],
+        link: "https://demo.ona.dashboard.bennetts.work" // Added link property
     },
     {
         title: "Java 2D Game Engine",
@@ -41,21 +42,32 @@ const ProjectsCard = () => {
 
   return (
     <div className="projects-card">
-      <h2>Projects</h2>
+      <h2>Personal Projects</h2>
       {projects.map((project, index) => (
         <div key={index} className="project">
           <h3>{project.title}</h3>
           <p>{project.description}</p>
+          
+          {/* Add conditional rendering for link */}
+          {project.link && (
+            <p><a 
+              href={project.link} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="project-link"
+            >
+              View Project
+            </a> - demo enivornment with sample data under all new accounts.</p>
+          )}
 
-          {/* Display images or videos in a row using MediaComponent */}
           <div className="project-images">
             {project.images.map((mediaSrc, mediaIndex) => (
               <MediaComponent
                 key={mediaIndex}
                 src={mediaSrc}
                 alt={`Project ${index + 1} Media ${mediaIndex + 1}`}
-                width="100%" // Set appropriate width
-                height="auto" // Maintain aspect ratio
+                width="100%"
+                height="auto"
               />
             ))}
           </div>
