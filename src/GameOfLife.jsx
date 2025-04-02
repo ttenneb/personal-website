@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./GameOfLife.css";
 
 const GameOfLife = ({
-  speed = 50,
+  speed = 150,
   maxRotation = 2,
   rotationPeriod = 30000,
   cellSize = 45,
@@ -84,7 +84,7 @@ const GameOfLife = ({
     const animateRotation = (currentTime) => {
       const elapsedTime = currentTime - startTime;
       rotationAngle.current =
-        maxRotation * Math.sin((2 * Math.PI * elapsedTime) / rotationPeriod);
+        maxRotation * Math.sin((2 * Math.PI * elapsedTime) / rotationPeriod) + 1;
 
       if (gridRef.current) {
         gridRef.current.style.transform = `rotate(${rotationAngle.current}deg)`;
