@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./GameOfLife.css";
 
 const GameOfLife = ({
-  speed = 1250,
-  maxRotation = 1,
+  speed = 50,
+  maxRotation = 2,
   rotationPeriod = 30000,
-  cellSize = 100,
+  cellSize = 45,
 }) => {
   const [grid, setGrid] = useState([]);
   const [rows, setRows] = useState(0);
@@ -121,7 +121,7 @@ const GameOfLife = ({
           row.map((col, colIndex) => (
             <div
               key={`${rowIndex}-${colIndex}`}
-              className={`cell ${col ? "cell-alive" : "cell-dead"}`}
+              className={`cell ${col ? "cell-alive" : "cell-dead"}`}d
             ></div>
           ))
         )}
