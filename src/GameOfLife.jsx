@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./GameOfLife.css";
 
 const GameOfLife = ({
-  speed = 150,
+  speed = 100,
   maxRotation = 2,
   rotationPeriod = 30000,
   cellSize = 45,
