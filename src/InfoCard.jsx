@@ -8,7 +8,7 @@ const InfoCard = () => {
         Full-Stack Software Engineering & Mathematics
       </p>
       <p>
-        Passionate about ML, Bayesian Mechanics, and distributed systems within software and beyond. Currently exploring opportunities...
+        Passionate about ML, Bayesian inference, and distributed systems within software and beyond. Currently exploring opportunities...
       </p>
       <div className="menu">
         <a href={window.location.origin + "/projects"}>
