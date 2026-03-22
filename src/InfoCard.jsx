@@ -23,10 +23,10 @@ const InfoCard = () => {
       </div>
       <div >
         <a href="https://github.com/ttenneb" target="_blank" rel="noreferrer">
-            <img width='30px' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg" />
+            <img width='30px' alt='GitHub' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg" />
         </a>
         <a href="https://www.linkedin.com/in/bennett-garcia-85272a197/" target="_blank" rel="noreferrer">
-            <img width='30px' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg" />
+            <img width='30px' alt='LinkedIn' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg" />
         </a>
       </div>
     </div>

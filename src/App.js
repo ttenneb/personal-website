@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import GameOfLife from './GameOfLife';
 import React from 'react';
