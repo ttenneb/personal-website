@@ -4,6 +4,7 @@ import "./InfoCard.css"; // Import the CSS
 const InfoCard = () => {
   return (
     <div className="info-card">
+      <h1>Bennett Garcia</h1>
       <p>
         Full-Stack Software Engineering & Mathematics
       </p>
