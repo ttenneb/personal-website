@@ -121,7 +121,7 @@ const GameOfLife = ({
           row.map((col, colIndex) => (
             <div
               key={`${rowIndex}-${colIndex}`}
-              className={`cell ${col ? "cell-alive" : "cell-dead"}`}d
+              className={`cell ${col ? "cell-alive" : "cell-dead"}`}
             ></div>
           ))
         )}
