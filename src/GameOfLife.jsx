@@ -4,6 +4,7 @@ import "./GameOfLife.css";
 const PROFILE_PARAM = "profileGol";
 const ALIVE_CLASS = "cell cell-alive";
 const DEAD_CLASS = "cell cell-dead";
+const BASE_ROTATION = 1;
 
 const shouldProfile = () => {
   if (typeof window === "undefined") return false;
@@ -24,19 +25,13 @@ const createGrid = (rows, cols) => {
   return grid;
 };
 
-const GameOfLife = ({
-  speed = 140,
-  maxRotation = 2,
-  rotationPeriod = 30000,
-  cellSize = 32,
-}) => {
+const GameOfLife = ({ speed = 140, cellSize = 32 }) => {
   const gridElementRef = useRef(null);
   const gridRef = useRef(new Uint8Array(0));
   const nextGridRef = useRef(new Uint8Array(0));
   const cellsRef = useRef([]);
   const dimensionsRef = useRef({ rows: 0, cols: 0 });
-  const animationFrameRef = useRef(null);
-  const intervalRef = useRef(null);
+  const simulationIntervalRef = useRef(null);
   const profilerRef = useRef({ enabled: false, ticks: 0, simMs: 0, domMs: 0 });
 
   useEffect(() => {
@@ -48,9 +43,21 @@ const GameOfLife = ({
     const resize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
-      const diagonal = Math.sqrt(width * width + height * height);
-      const cols = Math.ceil(diagonal / cellSize) * 2;
-      const rows = Math.ceil(diagonal / cellSize) * 2;
+      // Size the grid to the bounding box needed at the largest rotation.
+      // The old square was two viewport diagonals wide, creating a ~19 MP
+      // composited layer at 1080p even though most of it was never visible.
+      const maxAngle = (Math.abs(BASE_ROTATION) * Math.PI) / 180;
+      const padding = cellSize * 2;
+      const gridWidth =
+        Math.abs(width * Math.cos(maxAngle)) +
+        Math.abs(height * Math.sin(maxAngle)) +
+        padding;
+      const gridHeight =
+        Math.abs(height * Math.cos(maxAngle)) +
+        Math.abs(width * Math.sin(maxAngle)) +
+        padding;
+      const cols = Math.ceil(gridWidth / cellSize);
+      const rows = Math.ceil(gridHeight / cellSize);
       const grid = createGrid(rows, cols);
       const fragment = document.createDocumentFragment();
       const cells = new Array(rows * cols);
@@ -141,25 +148,35 @@ const GameOfLife = ({
       nextGridRef.current = grid;
     };
 
-    const rotate = (currentTime) => {
-      const rotationAngle =
-        maxRotation * Math.sin((2 * Math.PI * currentTime) / rotationPeriod) + 1;
+    const reducedMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)"
+    );
 
-      gridElement.style.transform = `rotate(${rotationAngle}deg)`;
-      animationFrameRef.current = requestAnimationFrame(rotate);
+    const stopAnimation = () => {
+      window.clearInterval(simulationIntervalRef.current);
+      simulationIntervalRef.current = null;
+    };
+
+    const syncAnimation = () => {
+      stopAnimation();
+      if (document.hidden || reducedMotion?.matches) return;
+
+      simulationIntervalRef.current = window.setInterval(step, speed);
     };
 
     resize();
     window.addEventListener("resize", resize);
-    intervalRef.current = window.setInterval(step, speed);
-    animationFrameRef.current = requestAnimationFrame(rotate);
+    document.addEventListener("visibilitychange", syncAnimation);
+    reducedMotion?.addEventListener("change", syncAnimation);
+    syncAnimation();
 
     return () => {
       window.removeEventListener("resize", resize);
-      window.clearInterval(intervalRef.current);
-      cancelAnimationFrame(animationFrameRef.current);
+      document.removeEventListener("visibilitychange", syncAnimation);
+      reducedMotion?.removeEventListener("change", syncAnimation);
+      stopAnimation();
     };
-  }, [cellSize, maxRotation, rotationPeriod, speed]);
+  }, [cellSize, speed]);
 
   return (
     <div className="game-of-life-background">
